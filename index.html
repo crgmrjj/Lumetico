@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lumetico | Tu Brújula Ética Corporativa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<canvas id="cielo" aria-hidden="true"></canvas>
+<canvas id="confeti" aria-hidden="true"></canvas>
+
+<!-- BARRA DE NAVEGACIÓN -->
+<nav class="navbar">
+    <button class="logo" data-nav="inicio" aria-label="Lumetico, ir al inicio">
+        <span class="logo-lumen" id="logo-lumen"></span>
+        <span class="logo-texto">Lume<span>tico</span></span>
+    </button>
+    <ul class="nav-links">
+        <li><button class="nav-btn activo" data-nav="inicio">Inicio</button></li>
+        <li><button class="nav-btn" data-nav="principios">Principios</button></li>
+        <li><button class="nav-btn juego" data-nav="laberinto">Laberinto<span class="solo-desk"> de Lumen</span></button></li>
+        <li><button class="nav-btn" data-nav="faro">El Faro</button></li>
+        <li><button class="nav-btn" data-nav="certificado">Certificado</button></li>
+    </ul>
+    <div class="luz-pill" id="luz-pill" title="Luz total acumulada">
+        <span class="mini lumen-slot" id="pill-lumen"></span><span id="pill-luz">0</span>&nbsp;✨
+    </div>
+</nav>
+
+<main class="container">
+
+    <!-- ===================== INICIO ===================== -->
+    <section id="inicio" class="seccion">
+        <div class="hero">
+            <div>
+                <span class="hero-badge"><span class="punto-vivo"></span>Programa de integridad corporativa</span>
+                <h1 aria-label="La ética es lo que haces cuando nadie te ve.">
+                    <span class="palabra" style="--d:.05s">La</span>
+                    <span class="palabra" style="--d:.15s">ética</span>
+                    <span class="palabra" style="--d:.25s">es</span>
+                    <span class="palabra" style="--d:.35s">lo</span>
+                    <span class="palabra" style="--d:.45s">que</span>
+                    <span class="palabra" style="--d:.55s">haces</span>
+                    <span class="palabra" style="--d:.75s">cuando</span>
+                    <span class="palabra" style="--d:.9s">nadie</span>
+                    <span class="palabra" style="--d:1.05s">te</span>
+                    <span class="palabra" style="--d:1.2s">ve.</span>
+                </h1>
+                <p class="lead">Lumetico convierte el código de ética en práctica diaria: aprende los principios, decide bajo presión en el Laberinto de Lumen y pide orientación anónima en El Faro.</p>
+                <div class="hero-ctas">
+                    <button class="btn btn-primario" data-nav="laberinto">Entrar al Laberinto</button>
+                    <button class="btn btn-secundario" data-nav="faro">Consultar un dilema</button>
+                </div>
+                <div class="hero-confianza">
+                    <span>Código A-R-C</span><span>Consultas anónimas</span><span>Certificación al finalizar</span>
+                </div>
+            </div>
+            <div class="hero-visual" aria-hidden="true">
+                <div class="orbita"></div>
+                <div class="orbita o2"></div>
+                <div class="halo-hero"></div>
+                <div class="hero-lumen lumen-slot" id="hero-lumen"></div>
+                <div class="flotante f1"><span class="ico">✓</span><span><b>Decisión íntegra</b><br>+1 de luz</span></div>
+                <div class="flotante f2"><span class="ico">🦋</span><span><b>Efecto mariposa</b><br>cada elección cuenta</span></div>
+                <span class="hero-etapa" id="hero-etapa">Oruga Curiosa</span>
+            </div>
+        </div>
+
+        <div class="metricas-head">
+            <div>
+                <h2>Panel de integridad</h2>
+                <p>Así se vive la cultura ética en la organización este mes.</p>
+            </div>
+            <span class="tag-demo">Datos de demostración</span>
+        </div>
+        <div class="metricas" id="metricas"></div>
+
+        <div class="home-grid">
+            <div class="panel ruta">
+                <h2>Tu ruta en Lumetico</h2>
+                <p class="ruta-sub">Tres pasos para pasar del manual a la acción.</p>
+                <ol class="pasos">
+                    <li><button class="paso" data-nav="principios"><span class="paso-num">1</span><span><strong>Conoce los principios</strong><small>Honestidad, justicia y el código A-R-C explicados con ejemplos.</small></span><span class="paso-ir" aria-hidden="true">›</span></button></li>
+                    <li><button class="paso" data-nav="laberinto"><span class="paso-num">2</span><span><strong>Recorre el Laberinto</strong><small>Decide contra reloj y observa cómo tus elecciones tienen consecuencias.</small></span><span class="paso-ir" aria-hidden="true">›</span></button></li>
+                    <li><button class="paso" data-nav="faro"><span class="paso-num">3</span><span><strong>Consulta El Faro</strong><small>Plantea un dilema real de forma anónima y recibe una guía.</small></span><span class="paso-ir" aria-hidden="true">›</span></button></li>
+                </ol>
+            </div>
+            <div class="panel feed" id="feed" aria-roledescription="carrusel" aria-label="Consultas recientes en El Faro">
+                <div class="feed-head">
+                    <h2>Recién resuelto en El Faro</h2>
+                    <span class="en-vivo"><span class="punto-vivo"></span>En vivo</span>
+                </div>
+                <div class="feed-viewport" id="feed-viewport" aria-live="polite"></div>
+                <div class="feed-pie">
+                    <button class="feed-ctrl" id="feed-prev" aria-label="Consulta anterior">‹</button>
+                    <div class="feed-progreso"><span id="feed-barra"></span></div>
+                    <span class="feed-contador" id="feed-contador">1 / 8</span>
+                    <button class="feed-ctrl" id="feed-next" aria-label="Consulta siguiente">›</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== PRINCIPIOS ===================== -->
+    <section id="principios" class="seccion oculta">
+        <header class="cabecera-seccion">
+            <h2 class="titulo-seccion">Nuestra cultura ética</h2>
+            <p class="lead">La ética no es solo un manual: es la forma en que actuamos cuando nadie nos ve. Estos son los tres principios que guían cada decisión.</p>
+        </header>
+        <div class="grid-principios">
+            <article class="panel principio">
+                <div class="principio-icono">🤝</div>
+                <h3>Honestidad y Respeto</h3>
+                <p>Actuar con verdad y reconocer la dignidad de todas las personas en la organización.</p>
+                <ul><li>Decir “me equivoqué” a tiempo.</li><li>Corregir en privado, nunca humillar.</li><li>No amplificar rumores.</li></ul>
+            </article>
+            <article class="panel principio">
+                <div class="principio-icono">⚖️</div>
+                <h3>Justicia y Equidad</h3>
+                <p>Decisiones imparciales que reconocen el mérito y evitan el favoritismo.</p>
+                <ul><li>Dar crédito a quien lo merece.</li><li>Rechazar regalos que comprometen.</li><li>Criterios claros para todos.</li></ul>
+            </article>
+            <article class="panel principio">
+                <div class="principio-icono">🛠️</div>
+                <h3>Crecimiento ante el Error</h3>
+                <p>Asumir sin excusas, Reparar el daño y Cerrar el ciclo sin rencores.</p>
+                <ul><li>Reportar un fallo aunque nadie lo haya visto.</li><li>Proponer soluciones, no culpables.</li><li>Convertir el error en aprendizaje.</li></ul>
+            </article>
+        </div>
+
+        <div class="arc-bloque">
+            <h3>El código A-R-C, paso a paso</h3>
+            <p>Toca cada letra para ver cómo se aplica en una situación real.</p>
+            <div class="arc" role="tablist">
+                <button class="arc-letra activa" role="tab" aria-selected="true" data-arc="A"><span class="letra">A</span><strong>Asumir</strong><small>Sin excusas ni culpables</small></button>
+                <button class="arc-letra" role="tab" aria-selected="false" data-arc="R"><span class="letra">R</span><strong>Reparar</strong><small>Acciones concretas</small></button>
+                <button class="arc-letra" role="tab" aria-selected="false" data-arc="C"><span class="letra">C</span><strong>Cerrar</strong><small>Aprender y soltar</small></button>
+            </div>
+            <div class="panel arc-detalle" id="arc-detalle" role="tabpanel">
+                <p id="arc-texto"></p>
+                <blockquote id="arc-ejemplo"></blockquote>
+            </div>
+        </div>
+
+        <div class="reglas">
+            <div class="panel regla">“Elogiamos en público, corregimos en privado.”<span>Regla de oro del respeto</span></div>
+            <div class="panel regla">“Si no lo contarías en voz alta, no lo hagas.”<span>Prueba de transparencia</span></div>
+            <div class="panel regla">“El silencio ante una injusticia también es una decisión.”<span>Principio de la voz asertiva</span></div>
+        </div>
+        <div class="cta-centro"><button class="btn btn-primario" data-nav="laberinto">Ponerme a prueba en el Laberinto</button></div>
+    </section>
+
+    <!-- ===================== LABERINTO ===================== -->
+    <section id="laberinto" class="seccion oculta">
+
+        <!-- Vista: introducción -->
+        <div id="lab-intro">
+            <header class="cabecera-seccion">
+                <h2 class="titulo-seccion">El Laberinto de Lumen</h2>
+                <p class="lead">Cada puerta es una decisión. Las correctas hacen brillar a Lumen; las incorrectas pueden abrir caminos que no esperabas.</p>
+            </header>
+            <div class="lab-intro">
+                <div>
+                    <div class="reglas-juego">
+                        <div class="panel regla-juego"><span class="ico">🎲</span><span><strong>Categorías al azar</strong><small>Seguridad de la Información, Clima Laboral y Relaciones de Poder. No sabrás cuál te toca hasta llegar al nodo.</small></span></div>
+                        <div class="panel regla-juego"><span class="ico">⏱️</span><span><strong>20 segundos por puerta</strong><small>En la vida real, muchas decisiones éticas se toman bajo presión. Si el tiempo se agota, cuenta como una decisión.</small></span></div>
+                        <div class="panel regla-juego"><span class="ico">🦋</span><span><strong>Efecto mariposa</strong><small>Algunas malas decisiones generan una nueva situación en tu camino: auditorías, chantajes o preguntas incómodas.</small></span></div>
+                    </div>
+                    <label class="panel switch-fila" for="toggle-presion">
+                        <span><strong>Modo presión</strong><small>Desactívalo si prefieres jugar sin temporizador.</small></span>
+                        <span class="switch"><input type="checkbox" id="toggle-presion" checked><span></span></span>
+                    </label>
+                    <div class="acciones" id="acciones-intro"></div>
+                </div>
+                <aside class="panel evolucion">
+                    <div class="evo-actual"><span class="lumen-slot" id="evo-lumen"></span></div>
+                    <div class="evo-nombre" id="evo-nombre">Oruga Curiosa</div>
+                    <div class="evo-desc" id="evo-desc"></div>
+                    <div class="evo-barra"><span id="evo-barra"></span></div>
+                    <div class="evo-falta" id="evo-falta"></div>
+                    <div class="galeria" id="galeria"></div>
+                    <div class="stats-intro">
+                        <div class="stat"><b id="st-luz">0</b><small>Luz total</small></div>
+                        <div class="stat"><b id="st-mejor">—</b><small>Mejor partida</small></div>
+                        <div class="stat"><b id="st-partidas">0</b><small>Partidas</small></div>
+                    </div>
+                    <button class="btn-texto" id="btn-reiniciar" style="margin-top:1rem">Reiniciar mi progreso</button>
+                </aside>
+            </div>
+        </div>
+
+        <!-- Vista: juego -->
+        <div id="lab-juego" class="oculta">
+            <div class="juego-top">
+                <h2>El Laberinto de Lumen</h2>
+                <div class="pills">
+                    <span class="pill luz" id="pill-run">✨ 0 / 6</span>
+                    <span class="pill racha" id="pill-racha">🔥 Racha 0</span>
+                </div>
+            </div>
+
+            <div class="mapa" id="mapa" aria-label="Mapa de progreso">
+                <div class="mapa-pista" id="mapa-pista">
+                    <div class="mapa-linea" id="mapa-linea"></div>
+                    <div class="mapa-progreso" id="mapa-progreso"></div>
+                    <div class="mapa-lumen" id="mapa-lumen"><span class="salto lumen-slot" id="mapa-lumen-svg"></span></div>
+                </div>
+            </div>
+
+            <div class="panel escenario" id="escenario">
+                <div class="escenario-lumen">
+                    <span class="lumen-grande lumen-slot" id="lumen-grande"></span>
+                    <div class="burbuja" id="burbuja" aria-live="polite">Mmm… ¿qué camino tomamos?</div>
+                    <div class="evo-mini"><span id="evo-mini-texto"></span><div class="evo-barra"><span id="evo-mini-barra"></span></div></div>
+                </div>
+                <div>
+                    <div class="dilema-top">
+                        <span class="chip" id="chip-cat">🎲 Eligiendo categoría…</span>
+                        <span class="contador-nodo" id="contador-nodo">Situación 1 de 6</span>
+                    </div>
+                    <div class="banner-mariposa oculta" id="banner-mariposa"><span class="ico">🦋</span><span>Efecto mariposa: esta situación es consecuencia de una decisión anterior.</span></div>
+                    <h3 id="texto-dilema">Cargando situación…</h3>
+
+                    <div class="timer" id="timer">
+                        <div class="timer-top"><span>Tiempo para decidir</span><span class="timer-seg" id="timer-seg">20s</span></div>
+                        <div class="timer-barra" role="progressbar" aria-label="Tiempo restante"><div class="timer-relleno" id="timer-relleno"></div></div>
+                    </div>
+
+                    <div class="puertas">
+                        <button class="puerta" id="puerta-izq" data-lado="izq" disabled>
+                            <span class="puerta-marco"><span class="puerta-hoja"><span class="puerta-letra">A</span></span></span>
+                            <span class="puerta-texto" id="texto-izq">…</span>
+                            <span class="puerta-tecla">Tecla <kbd>1</kbd> o <kbd>←</kbd></span>
+                        </button>
+                        <button class="puerta" id="puerta-der" data-lado="der" disabled>
+                            <span class="puerta-marco"><span class="puerta-hoja"><span class="puerta-letra">B</span></span></span>
+                            <span class="puerta-texto" id="texto-der">…</span>
+                            <span class="puerta-tecla">Tecla <kbd>2</kbd> o <kbd>→</kbd></span>
+                        </button>
+                    </div>
+
+                    <div class="feedback oculta" id="feedback" aria-live="polite">
+                        <div class="feedback-cab">
+                            <h3 id="fb-titulo"></h3>
+                            <span class="chip general" id="fb-principio"></span>
+                        </div>
+                        <p id="fb-texto"></p>
+                        <p class="fb-correcta oculta" id="fb-correcta"></p>
+                        <div class="aviso-mariposa oculta" id="aviso-mariposa">
+                            <span class="ico">🦋</span>
+                            <span><strong id="aviso-gancho"></strong><small>Se agregó una nueva situación a tu camino.</small></span>
+                        </div>
+                        <div class="feedback-acciones">
+                            <span class="pista-tecla">Pulsa Enter para continuar</span>
+                            <button class="btn btn-primario" id="btn-siguiente">Continuar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align:right;margin-top:.8rem"><button class="btn-texto" id="btn-salir">Pausar y volver al inicio del laberinto</button></div>
+        </div>
+
+        <!-- Vista: resultados -->
+        <div id="lab-fin" class="oculta">
+            <div class="panel fin">
+                <div class="anillo">
+                    <svg class="aro" viewBox="0 0 120 120" aria-hidden="true">
+                        <defs><linearGradient id="grad-aro" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f59e0b"/><stop offset="1" stop-color="#facc15"/></linearGradient></defs>
+                        <circle class="aro-fondo" cx="60" cy="60" r="54" fill="none" stroke-width="8"/>
+                        <circle class="aro-valor" id="aro-valor" cx="60" cy="60" r="54" fill="none" stroke-width="8" stroke-linecap="round" stroke-dasharray="339.29" stroke-dashoffset="339.29"/>
+                    </svg>
+                    <div class="anillo-centro"><div><span class="lumen-slot" id="fin-lumen"></span><b id="fin-pct">0%</b><small>de luz</small></div></div>
+                </div>
+                <div>
+                    <h2 id="fin-titulo">¡Travesía completada!</h2>
+                    <p class="fin-sub" id="fin-sub"></p>
+                    <div class="fin-stats">
+                        <div class="stat"><b id="fs-luz">0/0</b><small>Luz obtenida</small></div>
+                        <div class="stat"><b id="fs-racha">0</b><small>Mejor racha</small></div>
+                        <div class="stat"><b id="fs-mariposa">0</b><small>Efectos mariposa</small></div>
+                        <div class="stat"><b id="fs-tiempo">—</b><small>Decisión promedio</small></div>
+                    </div>
+                    <ul class="decisiones" id="decisiones"></ul>
+                    <div class="acciones">
+                        <button class="btn btn-primario" data-nav="certificado">Obtener mi certificado</button>
+                        <button class="btn btn-secundario" id="btn-otra">Jugar otra travesía</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== EL FARO ===================== -->
+    <section id="faro" class="seccion oculta">
+        <header class="cabecera-seccion">
+            <h2 class="titulo-seccion">El Faro de Lumen</h2>
+            <p class="lead">¿Enfrentas un dilema o presenciaste algo inusual? Cuéntalo de forma anónima y Lumen te dará una guía basada en nuestros principios.</p>
+        </header>
+        <div class="faro-grid">
+            <div class="panel faro-form">
+                <label for="texto-consulta">Describe tu situación</label>
+                <textarea id="texto-consulta" maxlength="600" placeholder="Ej.: Mi compañero se llevó el crédito de un proyecto en el que trabajamos juntos…"></textarea>
+                <div class="sugerencias" id="sugerencias"></div>
+                <div class="faro-fila">
+                    <span class="contador-chars" id="contador-chars">0 / 600</span>
+                    <button class="btn btn-azul" id="btn-faro">Pedir consejo a Lumen ✨</button>
+                </div>
+                <div id="respuesta-lumen"></div>
+            </div>
+            <aside class="panel historial">
+                <div class="historial-cab">
+                    <h2>Tu historial en El Faro</h2>
+                    <button class="btn-texto" id="btn-borrar-historial">Borrar</button>
+                </div>
+                <p class="privacidad">Tus consultas se guardan solo en este navegador. Nadie más puede verlas.</p>
+                <ul class="historial-lista" id="historial-lista"></ul>
+            </aside>
+        </div>
+    </section>
+
+    <!-- ===================== CERTIFICADO ===================== -->
+    <section id="certificado" class="seccion oculta">
+        <header class="cabecera-seccion" style="text-align:center">
+            <h2 class="titulo-seccion">Tu credencial ética</h2>
+            <p class="lead" style="margin-inline:auto">Escribe tu nombre tal como quieres que aparezca y guárdalo como PDF desde la ventana de impresión.</p>
+        </header>
+        <div class="panel cert-bloqueado oculta" id="cert-bloqueado">
+            <span class="lumen-slot" id="cert-bloq-lumen"></span>
+            <h3>Aún no hay certificado</h3>
+            <p>Completa una travesía en el Laberinto de Lumen para desbloquear tu credencial.</p>
+            <button class="btn btn-primario" data-nav="laberinto">Ir al Laberinto</button>
+        </div>
+        <div id="cert-contenido">
+            <div class="cert-controles">
+                <input type="text" id="nombre-usuario" maxlength="60" placeholder="Tu nombre completo" autocomplete="name" aria-label="Nombre para el certificado">
+                <button class="btn btn-primario" id="btn-imprimir">Imprimir o guardar PDF</button>
+            </div>
+            <div class="diploma" id="diploma">
+                <span class="d-lumen lumen-slot" id="cert-lumen"></span>
+                <div class="d-org">Lumetico · Programa de Integridad Corporativa</div>
+                <div class="d-titulo" id="cert-titulo">Certificado de Excelencia Ética</div>
+                <div class="d-otorga">Se otorga el presente reconocimiento a</div>
+                <div class="d-nombre vacio" id="cert-nombre">Tu nombre aquí</div>
+                <p class="d-texto" id="cert-texto"></p>
+                <div class="d-pie">
+                    <div><b id="cert-fecha">—</b>Fecha de emisión</div>
+                    <svg class="d-sello" viewBox="0 0 110 130" aria-hidden="true">
+                        <defs>
+                            <radialGradient id="oro" cx=".35" cy=".3"><stop offset="0" stop-color="#fff3b0"/><stop offset=".55" stop-color="#e0b43a"/><stop offset="1" stop-color="#a0761a"/></radialGradient>
+                        </defs>
+                        <path d="M34 78 L22 126 L40 116 L50 130 L56 84 Z" fill="#b91c1c"/>
+                        <path d="M76 78 L88 126 L70 116 L60 130 L54 84 Z" fill="#991b1b"/>
+                        <g transform="translate(55 55)">
+                            <circle r="46" fill="url(#oro)"/>
+                            <circle r="38" fill="none" stroke="#8a6414" stroke-width="1.5" stroke-dasharray="3 3"/>
+                            <circle r="31" fill="none" stroke="#fff6cc" stroke-width="1" opacity=".7"/>
+                            <text y="-4" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-weight="700" font-size="17" fill="#5c420c">A·R·C</text>
+                            <text y="14" text-anchor="middle" font-family="Outfit, sans-serif" font-size="8" letter-spacing="1.5" fill="#5c420c">INTEGRIDAD</text>
+                        </g>
+                    </svg>
+                    <div><b id="cert-folio">—</b>Folio de verificación</div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="pie">Lumetico · Proyecto del curso de Ética · Tu progreso se guarda automáticamente en este navegador.</footer>
+
+<div class="overlay-evo oculta" id="overlay-evo" role="dialog" aria-modal="true" aria-labelledby="evo-titulo">
+    <div class="destello"></div>
+    <div class="caja">
+        <span class="lumen-slot" id="overlay-lumen"></span>
+        <h2 id="evo-titulo">¡Lumen evolucionó!</h2>
+        <div class="etapa" id="overlay-etapa"></div>
+        <p id="overlay-desc"></p>
+        <button class="btn btn-primario" id="btn-cerrar-evo">Seguir brillando</button>
+    </div>
+</div>
+
+<div class="toast-zona" id="toasts" aria-live="polite"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
