@@ -507,6 +507,63 @@ textarea:focus { outline: none; border-color: var(--acento); box-shadow: 0 0 0 4
 .cert-bloqueado .lumen-slot { width: 120px; height: 120px; display: block; margin: 0 auto 1rem; filter: grayscale(.5); }
 .cert-bloqueado p { color: var(--gris); margin: .6rem 0 1.4rem; }
 
+
+/* =========================================
+   IMPACTO Y EVIDENCIAS
+========================================= */
+.evid-bloque + .evid-bloque { margin-top: 3.2rem; }
+.evid-subtitulo { font-family: var(--f-serif); font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 600; letter-spacing: -0.01em; line-height: 1.15; }
+.evid-intro { color: var(--gris); margin-top: .35rem; max-width: 64ch; }
+.evid-bloque .grid-principios { margin-top: 1.3rem; }
+
+/* Entrada escalonada al abrir la sección */
+.seccion.entrando .evid-anim { animation: fadeIn .55s ease both; animation-delay: calc(var(--i, 0) * .1s); }
+
+/* Bitácora */
+.bitacora-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 1rem; flex-wrap: wrap; }
+.bitacora { display: grid; gap: 1rem; margin-top: 1.3rem; }
+.evidencia {
+    --evid: var(--luz);
+    position: relative; overflow: hidden; padding: 1.5rem 1.5rem 1.5rem 1.7rem; border-radius: 20px;
+    transition: border-color .25s, transform .25s, box-shadow .25s;
+}
+.evidencia::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: linear-gradient(180deg, var(--evid), transparent 85%); }
+.evidencia:hover { border-color: var(--borde-fuerte); transform: translateY(-3px); box-shadow: 0 24px 50px -30px rgba(0, 0, 0, .9); }
+.evidencia.e-clima { --evid: var(--exito); }
+.evidencia.e-honestidad { --evid: var(--acento); }
+
+.evid-cab { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.evid-num { font-family: var(--f-serif); font-size: 2.4rem; font-weight: 700; line-height: 1; color: var(--evid); text-shadow: 0 0 22px rgba(250, 204, 21, .25); font-variant-numeric: tabular-nums; }
+.evid-titulo { flex: 1; min-width: 220px; }
+.evid-titulo h4 { font-size: 1.15rem; font-weight: 600; line-height: 1.3; }
+.evid-titulo .chip { margin-top: .45rem; white-space: normal; }
+
+.evid-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.2rem; }
+.evid-col { padding: 1rem 1.1rem; border-radius: 14px; background: rgba(255, 255, 255, .02); border: 1px solid var(--borde); }
+.evid-col.impacto { background: rgba(250, 204, 21, .05); border-color: rgba(250, 204, 21, .25); }
+.evid-etiqueta { display: flex; align-items: center; gap: .55rem; font-size: .76rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--texto-2); line-height: 1.3; }
+.evid-col.impacto .evid-etiqueta { color: var(--luz-suave); }
+.evid-paso { width: 26px; height: 26px; border-radius: 8px; display: grid; place-items: center; flex: none; font-size: .8rem; color: var(--luz); background: rgba(250, 204, 21, .12); border: 1px solid rgba(250, 204, 21, .3); }
+.evid-col p { color: var(--texto-2); font-size: .94rem; margin-top: .65rem; }
+.evid-col p strong { color: var(--luz-suave); font-weight: 600; }
+
+/* Cierre ejecutivo */
+.cierre-ejecutivo {
+    position: relative; overflow: hidden; margin-top: 3.2rem; padding: clamp(1.6rem, 4vw, 2.6rem); border-radius: 22px;
+    display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: center;
+    border-color: rgba(250, 204, 21, .35);
+    background:
+        radial-gradient(700px 320px at 0% 0%, rgba(250, 204, 21, .12), transparent 60%),
+        radial-gradient(600px 320px at 100% 100%, rgba(56, 189, 248, .12), transparent 60%),
+        var(--panel);
+}
+.cierre-ejecutivo::after { content: ""; position: absolute; right: -90px; top: -90px; width: 260px; height: 260px; border-radius: 50%; border: 1px dashed rgba(250, 204, 21, .25); animation: girar 46s linear infinite; pointer-events: none; }
+.cierre-texto, .cierre-acciones { position: relative; z-index: 1; }
+.cierre-ejecutivo h3 { font-family: var(--f-serif); font-size: clamp(1.6rem, 3.4vw, 2.3rem); font-weight: 600; line-height: 1.12; letter-spacing: -.02em; margin-top: 1rem; max-width: 24ch; }
+.cierre-ejecutivo p { color: var(--gris); margin-top: .6rem; max-width: 58ch; }
+.cierre-ejecutivo .hero-confianza { margin-top: 1.2rem; }
+.cierre-acciones { display: flex; flex-direction: column; gap: .7rem; min-width: 220px; }
+
 /* =========================================
    OVERLAY DE EVOLUCIÓN Y TOASTS
 ========================================= */
@@ -579,6 +636,8 @@ textarea:focus { outline: none; border-color: var(--acento); box-shadow: 0 0 0 4
     .fin { grid-template-columns: 1fr; text-align: center; }
     .fin .acciones { justify-content: center; }
     .decision { text-align: left; }
+    .evid-cols, .cierre-ejecutivo { grid-template-columns: 1fr; }
+    .cierre-acciones { flex-direction: row; flex-wrap: wrap; min-width: 0; }
 }
 @media (max-width: 760px) {
     .navbar { flex-wrap: wrap; row-gap: .5rem; }
@@ -601,6 +660,9 @@ textarea:focus { outline: none; border-color: var(--acento); box-shadow: 0 0 0 4
     .flotante.f1 { left: 0; }
     .flotante.f2 { right: 0; }
     .container { padding-top: 1.5rem; }
+    .evidencia { padding: 1.2rem 1.1rem 1.2rem 1.3rem; }
+    .evid-num { font-size: 2rem; }
+    .cierre-acciones .btn { flex: 1 1 100%; }
 }
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
@@ -620,6 +682,10 @@ textarea:focus { outline: none; border-color: var(--acento); box-shadow: 0 0 0 4
 }
 @media (max-width: 420px) {
     .nav-btn { padding-left: .42rem; padding-right: .42rem; font-size: .78rem; }
+}
+@media (max-width: 520px) {
+    .nav-links { display: grid; grid-template-columns: repeat(3, 1fr); gap: .3rem; }
+    .nav-btn { width: 100%; text-align: center; }
 }
 html { overflow-x: clip; }
 @media (hover: none), (max-width: 760px) { .puerta-tecla, .pista-tecla { display: none !important; } }
